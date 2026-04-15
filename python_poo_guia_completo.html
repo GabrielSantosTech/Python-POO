@@ -1,0 +1,1070 @@
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0d0f17;--bg2:#131621;--bg3:#1a1e2e;--card:#1e2235;--border:#2a2f47;
+  --accent:#a78bfa;--accent2:#34d399;--pink:#f472b6;--orange:#fb923c;
+  --yellow:#fbbf24;--red:#f87171;--blue:#60a5fa;
+  --text:#e2e8f0;--muted:#7c8db5;--code-bg:#0f1117;
+}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.7}
+header{background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;gap:1.5rem;height:58px}
+.logo{display:flex;align-items:center;gap:9px;font-size:1.05rem;font-weight:700;color:var(--text);flex-shrink:0}
+.logo-icon{width:30px;height:30px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;font-family:monospace}
+nav{display:flex;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav button{background:none;border:none;color:var(--muted);font-size:12px;padding:5px 9px;cursor:pointer;border-radius:5px;white-space:nowrap;transition:all .15s;font-family:inherit}
+nav button:hover{color:var(--text);background:var(--bg3)}
+nav button.active{color:var(--accent);background:rgba(167,139,250,.12)}
+.badge{background:var(--accent);color:#fff;font-size:10px;padding:1px 6px;border-radius:8px;font-weight:700;margin-left:4px}
+.layout{max-width:1200px;margin:0 auto;padding:1.5rem;display:grid;grid-template-columns:210px 1fr;gap:1.5rem}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.sidebar{display:none}}
+.sidebar{position:sticky;top:74px;height:fit-content}
+.stitle{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:600;margin-bottom:.4rem;padding:0 .4rem}
+.sitem{display:block;padding:5px 9px;border-radius:5px;font-size:12.5px;color:var(--muted);cursor:pointer;border:none;background:none;width:100%;text-align:left;transition:all .15s;font-family:inherit}
+.sitem:hover{color:var(--text);background:var(--bg3)}
+.sitem.active{color:var(--accent);background:rgba(167,139,250,.12)}
+.section{display:none}.section.active{display:block}
+.hero{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:2rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.hero-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.3);color:var(--accent);font-size:11px;padding:3px 10px;border-radius:16px;margin-bottom:.8rem;font-weight:600}
+.hero h1{font-size:2rem;font-weight:800;line-height:1.2;margin-bottom:.7rem}
+.hero h1 span{color:var(--accent)}
+.hero p{color:var(--muted);max-width:580px;font-size:.9rem}
+.hero-meta{display:flex;gap:1.2rem;margin-top:1.2rem;flex-wrap:wrap}
+.hero-stat{display:flex;align-items:center;gap:5px;font-size:12px}
+.dot{width:7px;height:7px;border-radius:50%}
+.dot.purple{background:var(--accent)}.dot.green{background:var(--accent2)}.dot.pink{background:var(--pink)}
+.cb{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:1.3rem;margin-bottom:1.3rem}
+.btitle{font-size:1rem;font-weight:700;margin-bottom:.9rem;display:flex;align-items:center;gap:7px}
+.btitle .ic{font-size:1rem}
+h2.sh{font-size:1.3rem;font-weight:700;margin-bottom:1.3rem;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
+h3.sub{font-size:.95rem;font-weight:600;margin:1.1rem 0 .5rem;color:var(--text)}
+.cw{background:var(--code-bg);border:1px solid var(--border);border-radius:9px;overflow:hidden;margin:.7rem 0}
+.ch{display:flex;align-items:center;justify-content:space-between;padding:6px 12px;border-bottom:1px solid var(--border);background:rgba(255,255,255,.02)}
+.cl{font-size:10px;color:var(--muted);font-family:monospace;font-weight:700;text-transform:uppercase}
+.cpb{background:var(--bg3);border:1px solid var(--border);color:var(--muted);font-size:10px;padding:2px 8px;border-radius:4px;cursor:pointer;font-family:inherit;transition:all .15s}
+.cpb:hover{color:var(--text);border-color:var(--accent)}
+.cpb.ok{color:var(--accent2);border-color:var(--accent2)}
+pre{padding:.9rem 1.1rem;overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+pre::-webkit-scrollbar{height:3px}
+pre::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+code{font-family:'JetBrains Mono','Fira Code',monospace;font-size:12.5px;line-height:1.85}
+.kw{color:#c792ea}.fn{color:#82aaff}.str{color:#c3e88d}.cm{color:#546e7a;font-style:italic}
+.num{color:#f78c6c}.op{color:#89ddff}.cls{color:#ffcb6b}.tp{color:#4fc1ff}.pn{color:#e2e8f0}
+.deco{color:#f07178}.slf{color:#ff9cac}
+.ic{background:var(--code-bg);border:1px solid var(--border);padding:1px 5px;border-radius:3px;font-family:monospace;font-size:11.5px;color:#c3e88d}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.9rem;margin:.9rem 0}
+.card{background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:1.1rem;transition:border-color .15s}
+.card:hover{border-color:var(--accent)}
+.card-icon{font-size:1.3rem;margin-bottom:.5rem}
+.card h4{font-size:.85rem;font-weight:600;margin-bottom:.3rem}
+.card p{font-size:11.5px;color:var(--muted);line-height:1.5}
+.tw{overflow-x:auto;margin:.7rem 0}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{background:var(--bg3);padding:7px 11px;text-align:left;font-weight:600;font-size:11px;color:var(--muted);border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:.4px}
+td{padding:7px 11px;border-bottom:1px solid rgba(42,47,71,.45);vertical-align:top}
+tr:hover td{background:rgba(255,255,255,.015)}
+.tag{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:3px;font-weight:600;font-family:monospace}
+.tag.pu{background:rgba(167,139,250,.12);color:#c4b5fd;border:1px solid rgba(167,139,250,.2)}
+.tag.gr{background:rgba(52,211,153,.1);color:#6ee7b7;border:1px solid rgba(52,211,153,.2)}
+.tag.bl{background:rgba(96,165,250,.1);color:#93c5fd;border:1px solid rgba(96,165,250,.2)}
+.tag.or{background:rgba(251,146,60,.1);color:#fdba74;border:1px solid rgba(251,146,60,.2)}
+.tag.pk{background:rgba(244,114,182,.1);color:#f9a8d4;border:1px solid rgba(244,114,182,.2)}
+.tag.re{background:rgba(248,113,113,.1);color:#fca5a5;border:1px solid rgba(248,113,113,.2)}
+.al{display:flex;gap:9px;padding:10px 12px;border-radius:7px;margin:.7rem 0;font-size:12.5px}
+.al.info{background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:#93c5fd}
+.al.warn{background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.2);color:#fde68a}
+.al.ok{background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.2);color:#6ee7b7}
+.al.tip{background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.2);color:#c4b5fd}
+.al-icon{flex-shrink:0;margin-top:1px}
+.steps{display:flex;flex-direction:column;gap:.7rem}
+.step{display:flex;gap:.9rem;align-items:flex-start}
+.snum{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px}
+.sc h4{font-size:.85rem;font-weight:600;margin-bottom:3px}
+.sc p{font-size:12.5px;color:var(--muted)}
+.pill{display:inline-flex;align-items:center;gap:4px;background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.25);color:#c4b5fd;font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600;margin:2px}
+.divider{height:1px;background:var(--border);margin:1.2rem 0}
+.concept-box{border-left:3px solid var(--accent);background:rgba(167,139,250,.05);border-radius:0 8px 8px 0;padding:.9rem 1.1rem;margin:.8rem 0;font-size:13px}
+.concept-box strong{color:var(--accent);display:block;margin-bottom:.3rem;font-size:.85rem}
+</style>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">py</div>
+      <span>Python <span style="color:var(--muted);font-weight:300">POO</span></span>
+    </div>
+    <nav id="nav">
+      <button class="active" onclick="go('inicio',this)">Início</button>
+      <button onclick="go('funcoes',this)">Funções</button>
+      <button onclick="go('classes',this)">Classes</button>
+      <button onclick="go('heranca',this)">Herança</button>
+      <button onclick="go('encap',this)">Encapsulamento</button>
+      <button onclick="go('input',this)">Input & Listas</button>
+      <button onclick="go('especiais',this)">Métodos especiais</button>
+      <button onclick="go('avancado',this)">Avançado<span class="badge">+</span></button>
+      <button onclick="go('projeto',this)">Projeto</button>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="sidebar">
+  <div class="stitle">Conteúdo</div>
+  <button class="sitem active" onclick="go('inicio',null)">Visão geral</button>
+  <button class="sitem" onclick="go('funcoes',null)">def — funções</button>
+  <button class="sitem" onclick="go('classes',null)">class — básico</button>
+  <button class="sitem" onclick="go('heranca',null)">Herança</button>
+  <button class="sitem" onclick="go('encap',null)">Encapsulamento</button>
+  <button class="sitem" onclick="go('input',null)">Input, listas & loops</button>
+  <button class="sitem" onclick="go('especiais',null)">Métodos especiais</button>
+  <button class="sitem" onclick="go('avancado',null)">Polimorfismo & mais</button>
+  <button class="sitem" onclick="go('projeto',null)">Projeto completo</button>
+</aside>
+
+<main style="min-width:0">
+
+<!-- INÍCIO -->
+<section id="inicio" class="section active">
+  <div class="hero">
+    <div class="hero-tag">🐍 Orientação a Objetos em Python</div>
+    <h1>POO com <span>Python</span><br>Do zero ao avançado</h1>
+    <p>Aprenda classes, objetos, herança, encapsulamento e polimorfismo com exemplos práticos, inputs, listas e projetos reais.</p>
+    <div class="hero-meta">
+      <div class="hero-stat"><div class="dot purple"></div> Classes e objetos</div>
+      <div class="hero-stat"><div class="dot green"></div> Input e listas</div>
+      <div class="hero-stat"><div class="dot pink"></div> Projetos práticos</div>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card"><div class="card-icon">📦</div><h4>class</h4><p>Molde para criar objetos com atributos e comportamentos próprios.</p></div>
+    <div class="card"><div class="card-icon">⚙️</div><h4>def</h4><p>Define funções e métodos — blocos de código reutilizáveis.</p></div>
+    <div class="card"><div class="card-icon">🧬</div><h4>Herança</h4><p>Uma classe filha herda tudo da classe pai e pode estender.</p></div>
+    <div class="card"><div class="card-icon">🔒</div><h4>Encapsulamento</h4><p>Controla o acesso a atributos com <span class="ic">_</span> e <span class="ic">__</span>.</p></div>
+    <div class="card"><div class="card-icon">🎭</div><h4>Polimorfismo</h4><p>Mesmo método, comportamentos diferentes em cada classe.</p></div>
+    <div class="card"><div class="card-icon">✨</div><h4>Métodos especiais</h4><p><span class="ic">__init__</span>, <span class="ic">__str__</span>, <span class="ic">__len__</span> e muito mais.</p></div>
+  </div>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">🗺️</span> Roteiro de aprendizado</div>
+    <div class="tw"><table>
+      <thead><tr><th>Tópico</th><th>O que cobre</th><th>Nível</th></tr></thead>
+      <tbody>
+        <tr><td>def — funções</td><td>parâmetros, return, *args, **kwargs, lambda</td><td><span class="tag gr">Básico</span></td></tr>
+        <tr><td>class básico</td><td>__init__, self, atributos, métodos de instância</td><td><span class="tag gr">Básico</span></td></tr>
+        <tr><td>Herança</td><td>super(), override, múltipla herança, MRO</td><td><span class="tag bl">Intermediário</span></td></tr>
+        <tr><td>Encapsulamento</td><td>_privado, __muito_privado, property, setter</td><td><span class="tag bl">Intermediário</span></td></tr>
+        <tr><td>Input & Listas</td><td>input com classes, listas de objetos, loops</td><td><span class="tag bl">Intermediário</span></td></tr>
+        <tr><td>Métodos especiais</td><td>__str__, __repr__, __eq__, __add__, __len__</td><td><span class="tag pu">Avançado</span></td></tr>
+        <tr><td>Polimorfismo</td><td>duck typing, @classmethod, @staticmethod, ABC</td><td><span class="tag pu">Avançado</span></td></tr>
+        <tr><td>Projeto completo</td><td>Sistema de cadastro com tudo integrado</td><td><span class="tag pk">Projeto</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- FUNÇÕES -->
+<section id="funcoes" class="section">
+  <h2 class="sh">def — Funções em Python</h2>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">⚙️</span> Sintaxe básica</div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="cm"># Definir uma função simples</span>
+<span class="kw">def</span> <span class="fn">saudar</span>(nome):
+    <span class="kw">return</span> <span class="str">f"Olá, {nome}!"</span>
+
+<span class="fn">print</span>(<span class="fn">saudar</span>(<span class="str">"Ana"</span>))   <span class="cm"># Olá, Ana!</span>
+
+<span class="cm"># Parâmetro com valor padrão</span>
+<span class="kw">def</span> <span class="fn">saudar</span>(nome, saudacao=<span class="str">"Olá"</span>):
+    <span class="kw">return</span> <span class="str">f"{saudacao}, {nome}!"</span>
+
+<span class="fn">print</span>(<span class="fn">saudar</span>(<span class="str">"João"</span>))              <span class="cm"># Olá, João!</span>
+<span class="fn">print</span>(<span class="fn">saudar</span>(<span class="str">"Maria"</span>, <span class="str">"Oi"</span>))      <span class="cm"># Oi, Maria!</span>
+<span class="fn">print</span>(<span class="fn">saudar</span>(saudacao=<span class="str">"Boa tarde"</span>, nome=<span class="str">"Pedro"</span>))
+
+<span class="cm"># Múltiplos retornos (retorna uma tupla)</span>
+<span class="kw">def</span> <span class="fn">minmax</span>(lista):
+    <span class="kw">return</span> <span class="fn">min</span>(lista), <span class="fn">max</span>(lista)
+
+menor, maior = <span class="fn">minmax</span>([<span class="num">3</span>, <span class="num">1</span>, <span class="num">9</span>, <span class="num">4</span>])
+<span class="fn">print</span>(menor, maior)   <span class="cm"># 1  9</span></code></pre></div>
+  </div>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">📦</span> *args e **kwargs</div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="cm"># *args — aceita qualquer número de argumentos posicionais</span>
+<span class="kw">def</span> <span class="fn">somar</span>(*numeros):
+    <span class="kw">return</span> <span class="fn">sum</span>(numeros)
+
+<span class="fn">print</span>(<span class="fn">somar</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>))       <span class="cm"># 6</span>
+<span class="fn">print</span>(<span class="fn">somar</span>(<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>, <span class="num">40</span>)) <span class="cm"># 100</span>
+
+<span class="cm"># **kwargs — aceita qualquer número de argumentos nomeados</span>
+<span class="kw">def</span> <span class="fn">ficha</span>(**dados):
+    <span class="kw">for</span> chave, valor <span class="kw">in</span> dados.<span class="fn">items</span>():
+        <span class="fn">print</span>(<span class="str">f"  {chave}: {valor}"</span>)
+
+<span class="fn">ficha</span>(nome=<span class="str">"Ana"</span>, idade=<span class="num">25</span>, cidade=<span class="str">"SP"</span>)
+
+<span class="cm"># Combinando tudo</span>
+<span class="kw">def</span> <span class="fn">completa</span>(obrigatorio, *args, **kwargs):
+    <span class="fn">print</span>(<span class="str">f"Obrigatório: {obrigatorio}"</span>)
+    <span class="fn">print</span>(<span class="str">f"Extras: {args}"</span>)
+    <span class="fn">print</span>(<span class="str">f"Nomeados: {kwargs}"</span>)
+
+<span class="fn">completa</span>(<span class="str">"Python"</span>, <span class="str">"legal"</span>, <span class="str">"top"</span>, versao=<span class="num">3</span>, nivel=<span class="str">"iniciante"</span>)</code></pre></div>
+  </div>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">⚡</span> Lambda, type hints e docstrings</div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="cm"># Lambda — função anônima em uma linha</span>
+dobrar = <span class="kw">lambda</span> x: x * <span class="num">2</span>
+<span class="fn">print</span>(<span class="fn">dobrar</span>(<span class="num">5</span>))  <span class="cm"># 10</span>
+
+<span class="cm"># Lambdas com sorted, filter, map</span>
+nomes = [<span class="str">"Carlos"</span>, <span class="str">"Ana"</span>, <span class="str">"Zé"</span>, <span class="str">"Bia"</span>]
+<span class="fn">print</span>(<span class="fn">sorted</span>(nomes, key=<span class="kw">lambda</span> n: <span class="fn">len</span>(n)))
+<span class="fn">print</span>(<span class="fn">list</span>(<span class="fn">filter</span>(<span class="kw">lambda</span> n: <span class="fn">len</span>(n) > <span class="num">2</span>, nomes)))
+<span class="fn">print</span>(<span class="fn">list</span>(<span class="fn">map</span>(<span class="kw">lambda</span> n: n.<span class="fn">upper</span>(), nomes)))
+
+<span class="cm"># Type hints — indica os tipos esperados</span>
+<span class="kw">def</span> <span class="fn">calcular_imc</span>(peso: <span class="tp">float</span>, altura: <span class="tp">float</span>) -> <span class="tp">float</span>:
+    <span class="str">"""
+    Calcula o Índice de Massa Corporal.
+    
+    Args:
+        peso: Peso em kg
+        altura: Altura em metros
+    Returns:
+        IMC calculado
+    """</span>
+    <span class="kw">return</span> round(peso / (altura ** <span class="num">2</span>), <span class="num">2</span>)
+
+imc = <span class="fn">calcular_imc</span>(<span class="num">70.0</span>, <span class="num">1.75</span>)
+<span class="fn">print</span>(<span class="str">f"IMC: {imc}"</span>)  <span class="cm"># IMC: 22.86</span>
+<span class="fn">print</span>(<span class="fn">calcular_imc</span>.<span class="fn">__doc__</span>)  <span class="cm"># mostra a docstring</span></code></pre></div>
+  </div>
+</section>
+
+<!-- CLASSES -->
+<section id="classes" class="section">
+  <h2 class="sh">class — Orientação a Objetos básica</h2>
+
+  <div class="concept-box">
+    <strong>O que é uma classe?</strong>
+    Uma <strong>classe</strong> é um molde. Um <strong>objeto</strong> é a coisa criada a partir desse molde. <span class="ic">__init__</span> é o construtor — roda automaticamente quando você cria o objeto. <span class="ic">self</span> representa o próprio objeto dentro da classe.
+  </div>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">📦</span> Primeira classe — do zero</div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="kw">class</span> <span class="cls">Pessoa</span>:
+    <span class="cm"># __init__ é chamado ao criar o objeto</span>
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, nome: <span class="tp">str</span>, idade: <span class="tp">int</span>):
+        <span class="slf">self</span>.nome  = nome   <span class="cm"># atributo de instância</span>
+        <span class="slf">self</span>.idade = idade
+
+    <span class="cm"># Método de instância</span>
+    <span class="kw">def</span> <span class="fn">apresentar</span>(<span class="slf">self</span>):
+        <span class="fn">print</span>(<span class="str">f"Oi! Sou {self.nome}, {self.idade} anos."</span>)
+
+    <span class="kw">def</span> <span class="fn">aniversario</span>(<span class="slf">self</span>):
+        <span class="slf">self</span>.idade += <span class="num">1</span>
+        <span class="fn">print</span>(<span class="str">f"Parabéns {self.nome}! Agora tem {self.idade} anos."</span>)
+
+    <span class="kw">def</span> <span class="fn">eh_maior</span>(<span class="slf">self</span>) -> <span class="tp">bool</span>:
+        <span class="kw">return</span> <span class="slf">self</span>.idade >= <span class="num">18</span>
+
+
+<span class="cm"># Criando objetos (instâncias)</span>
+p1 = <span class="cls">Pessoa</span>(<span class="str">"Ana"</span>, <span class="num">25</span>)
+p2 = <span class="cls">Pessoa</span>(<span class="str">"João"</span>, <span class="num">15</span>)
+
+p1.<span class="fn">apresentar</span>()          <span class="cm"># Oi! Sou Ana, 25 anos.</span>
+p1.<span class="fn">aniversario</span>()         <span class="cm"># Parabéns Ana! Agora tem 26 anos.</span>
+<span class="fn">print</span>(p2.<span class="fn">eh_maior</span>())     <span class="cm"># False</span>
+
+<span class="cm"># Acessar e modificar atributos diretamente</span>
+<span class="fn">print</span>(p1.nome)            <span class="cm"># Ana</span>
+p1.nome = <span class="str">"Ana Paula"</span>
+<span class="fn">print</span>(p1.nome)            <span class="cm"># Ana Paula</span></code></pre></div>
+  </div>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">🏷️</span> Atributos de classe vs atributos de instância</div>
+    <div class="al warn"><span class="al-icon">⚠️</span> Atributos de classe são <strong>compartilhados</strong> entre todos os objetos. Atributos de instância (<span class="ic">self.x</span>) pertencem a cada objeto individualmente.</div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="kw">class</span> <span class="cls">Contador</span>:
+    total = <span class="num">0</span>  <span class="cm"># atributo de CLASSE — compartilhado por todos</span>
+
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, nome):
+        <span class="slf">self</span>.nome = nome          <span class="cm"># atributo de INSTÂNCIA</span>
+        <span class="cls">Contador</span>.total += <span class="num">1</span>
+
+    <span class="deco">@classmethod</span>
+    <span class="kw">def</span> <span class="fn">quantos</span>(<span class="tp">cls</span>):
+        <span class="fn">print</span>(<span class="str">f"Total criados: {cls.total}"</span>)
+
+
+c1 = <span class="cls">Contador</span>(<span class="str">"primeiro"</span>)
+c2 = <span class="cls">Contador</span>(<span class="str">"segundo"</span>)
+c3 = <span class="cls">Contador</span>(<span class="str">"terceiro"</span>)
+<span class="cls">Contador</span>.<span class="fn">quantos</span>()    <span class="cm"># Total criados: 3</span>
+<span class="fn">print</span>(<span class="cls">Contador</span>.total)  <span class="cm"># 3 — mesmo valor para todos</span></code></pre></div>
+  </div>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">🏗️</span> Exemplo real — classe Produto</div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="kw">class</span> <span class="cls">Produto</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, nome: <span class="tp">str</span>, preco: <span class="tp">float</span>, estoque: <span class="tp">int</span> = <span class="num">0</span>):
+        <span class="slf">self</span>.nome    = nome
+        <span class="slf">self</span>.preco   = preco
+        <span class="slf">self</span>.estoque = estoque
+
+    <span class="kw">def</span> <span class="fn">adicionar</span>(<span class="slf">self</span>, qtd: <span class="tp">int</span>):
+        <span class="slf">self</span>.estoque += qtd
+        <span class="fn">print</span>(<span class="str">f"+{qtd} unidades de {self.nome}. Estoque: {self.estoque}"</span>)
+
+    <span class="kw">def</span> <span class="fn">vender</span>(<span class="slf">self</span>, qtd: <span class="tp">int</span>):
+        <span class="kw">if</span> qtd > <span class="slf">self</span>.estoque:
+            <span class="fn">print</span>(<span class="str">f"Estoque insuficiente! Temos {self.estoque} unidades."</span>)
+        <span class="kw">else</span>:
+            <span class="slf">self</span>.estoque -= qtd
+            total = qtd * <span class="slf">self</span>.preco
+            <span class="fn">print</span>(<span class="str">f"Venda: {qtd}x {self.nome} = R${total:.2f}"</span>)
+
+    <span class="kw">def</span> <span class="fn">info</span>(<span class="slf">self</span>):
+        <span class="fn">print</span>(<span class="str">f"[{self.nome}] R${self.preco:.2f} | Estoque: {self.estoque}"</span>)
+
+
+cafe  = <span class="cls">Produto</span>(<span class="str">"Café 500g"</span>, <span class="num">18.90</span>)
+leite = <span class="cls">Produto</span>(<span class="str">"Leite 1L"</span>, <span class="num">6.50</span>, estoque=<span class="num">20</span>)
+
+cafe.<span class="fn">adicionar</span>(<span class="num">10</span>)
+cafe.<span class="fn">vender</span>(<span class="num">3</span>)
+cafe.<span class="fn">info</span>()
+leite.<span class="fn">vender</span>(<span class="num">25</span>)   <span class="cm"># vai dar erro de estoque</span></code></pre></div>
+  </div>
+</section>
+
+<!-- HERANÇA -->
+<section id="heranca" class="section">
+  <h2 class="sh">Herança</h2>
+
+  <div class="concept-box">
+    <strong>O que é herança?</strong>
+    A classe <strong>filha</strong> herda todos os atributos e métodos da classe <strong>pai</strong>. Use <span class="ic">super()</span> para acessar o pai de dentro da filha. Você pode <strong>sobrescrever</strong> (override) qualquer método.
+  </div>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">🧬</span> Herança simples</div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="kw">class</span> <span class="cls">Animal</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, nome: <span class="tp">str</span>, idade: <span class="tp">int</span>):
+        <span class="slf">self</span>.nome  = nome
+        <span class="slf">self</span>.idade = idade
+
+    <span class="kw">def</span> <span class="fn">apresentar</span>(<span class="slf">self</span>):
+        <span class="fn">print</span>(<span class="str">f"Animal: {self.nome}, {self.idade} anos"</span>)
+
+    <span class="kw">def</span> <span class="fn">falar</span>(<span class="slf">self</span>):
+        <span class="fn">print</span>(<span class="str">"... (sem som)"</span>)
+
+
+<span class="cm"># Cachorro HERDA de Animal</span>
+<span class="kw">class</span> <span class="cls">Cachorro</span>(<span class="cls">Animal</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, nome, idade, raca):
+        <span class="fn">super</span>().<span class="fn">__init__</span>(nome, idade)  <span class="cm"># chama o __init__ do pai</span>
+        <span class="slf">self</span>.raca = raca               <span class="cm"># atributo próprio</span>
+
+    <span class="kw">def</span> <span class="fn">falar</span>(<span class="slf">self</span>):             <span class="cm"># OVERRIDE — sobrescreve o pai</span>
+        <span class="fn">print</span>(<span class="str">f"{self.nome}: Au au!"</span>)
+
+    <span class="kw">def</span> <span class="fn">buscar</span>(<span class="slf">self</span>):            <span class="cm"># método só do Cachorro</span>
+        <span class="fn">print</span>(<span class="str">f"{self.nome} foi buscar a bolinha!"</span>)
+
+
+<span class="kw">class</span> <span class="cls">Gato</span>(<span class="cls">Animal</span>):
+    <span class="kw">def</span> <span class="fn">falar</span>(<span class="slf">self</span>):
+        <span class="fn">print</span>(<span class="str">f"{self.nome}: Miau!"</span>)
+
+    <span class="kw">def</span> <span class="fn">ronronar</span>(<span class="slf">self</span>):
+        <span class="fn">print</span>(<span class="str">f"{self.nome} está ronronando... 😻"</span>)
+
+
+rex  = <span class="cls">Cachorro</span>(<span class="str">"Rex"</span>, <span class="num">3</span>, <span class="str">"Labrador"</span>)
+mimi = <span class="cls">Gato</span>(<span class="str">"Mimi"</span>, <span class="num">5</span>)
+
+rex.<span class="fn">apresentar</span>()   <span class="cm"># herdado do Animal</span>
+rex.<span class="fn">falar</span>()        <span class="cm"># Rex: Au au! (override)</span>
+rex.<span class="fn">buscar</span>()       <span class="cm"># método próprio</span>
+mimi.<span class="fn">falar</span>()       <span class="cm"># Mimi: Miau!</span>
+
+<span class="cm"># Verificar herança</span>
+<span class="fn">print</span>(<span class="fn">isinstance</span>(rex, <span class="cls">Animal</span>))    <span class="cm"># True</span>
+<span class="fn">print</span>(<span class="fn">isinstance</span>(rex, <span class="cls">Cachorro</span>)) <span class="cm"># True</span>
+<span class="fn">print</span>(<span class="fn">issubclass</span>(<span class="cls">Gato</span>, <span class="cls">Animal</span>))  <span class="cm"># True</span></code></pre></div>
+  </div>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">🌳</span> Herança múltipla e MRO</div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="kw">class</span> <span class="cls">Voador</span>:
+    <span class="kw">def</span> <span class="fn">voar</span>(<span class="slf">self</span>):
+        <span class="fn">print</span>(<span class="str">f"{self.nome} está voando!"</span>)
+
+<span class="kw">class</span> <span class="cls">Nadador</span>:
+    <span class="kw">def</span> <span class="fn">nadar</span>(<span class="slf">self</span>):
+        <span class="fn">print</span>(<span class="str">f"{self.nome} está nadando!"</span>)
+
+<span class="cm"># Pato herda de Animal, Voador E Nadador</span>
+<span class="kw">class</span> <span class="cls">Pato</span>(<span class="cls">Animal</span>, <span class="cls">Voador</span>, <span class="cls">Nadador</span>):
+    <span class="kw">def</span> <span class="fn">falar</span>(<span class="slf">self</span>):
+        <span class="fn">print</span>(<span class="str">f"{self.nome}: Quack quack!"</span>)
+
+
+donald = <span class="cls">Pato</span>(<span class="str">"Donald"</span>, <span class="num">90</span>)
+donald.<span class="fn">falar</span>()
+donald.<span class="fn">voar</span>()
+donald.<span class="fn">nadar</span>()
+donald.<span class="fn">apresentar</span>()  <span class="cm"># herdado de Animal</span>
+
+<span class="cm"># MRO — ordem que Python busca métodos</span>
+<span class="fn">print</span>(<span class="cls">Pato</span>.<span class="fn">__mro__</span>)</code></pre></div>
+  </div>
+</section>
+
+<!-- ENCAPSULAMENTO -->
+<section id="encap" class="section">
+  <h2 class="sh">Encapsulamento</h2>
+
+  <div class="concept-box">
+    <strong>Convenções de acesso em Python</strong>
+    <span class="ic">nome</span> = público (qualquer um acessa) &nbsp;|&nbsp; <span class="ic">_nome</span> = protegido (convenção: não acesse de fora) &nbsp;|&nbsp; <span class="ic">__nome</span> = privado (Python aplica name mangling)
+  </div>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">🔒</span> _ e __ na prática</div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="kw">class</span> <span class="cls">ContaBancaria</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, titular, saldo_inicial=<span class="num">0</span>):
+        <span class="slf">self</span>.titular   = titular         <span class="cm"># público</span>
+        <span class="slf">self</span>._agencia  = <span class="str">"0001"</span>          <span class="cm"># protegido (convenção)</span>
+        <span class="slf">self</span>.__saldo   = saldo_inicial   <span class="cm"># privado (name mangling)</span>
+
+    <span class="kw">def</span> <span class="fn">depositar</span>(<span class="slf">self</span>, valor):
+        <span class="kw">if</span> valor > <span class="num">0</span>:
+            <span class="slf">self</span>.__saldo += valor
+            <span class="fn">print</span>(<span class="str">f"Depósito de R${valor:.2f}. Novo saldo: R${self.__saldo:.2f}"</span>)
+        <span class="kw">else</span>:
+            <span class="fn">print</span>(<span class="str">"Valor inválido!"</span>)
+
+    <span class="kw">def</span> <span class="fn">sacar</span>(<span class="slf">self</span>, valor):
+        <span class="kw">if</span> valor > <span class="slf">self</span>.__saldo:
+            <span class="fn">print</span>(<span class="str">"Saldo insuficiente!"</span>)
+        <span class="kw">else</span>:
+            <span class="slf">self</span>.__saldo -= valor
+            <span class="fn">print</span>(<span class="str">f"Saque de R${valor:.2f}. Saldo: R${self.__saldo:.2f}"</span>)
+
+    <span class="kw">def</span> <span class="fn">ver_saldo</span>(<span class="slf">self</span>):
+        <span class="fn">print</span>(<span class="str">f"Saldo de {self.titular}: R${self.__saldo:.2f}"</span>)
+
+
+conta = <span class="cls">ContaBancaria</span>(<span class="str">"Ana"</span>, <span class="num">1000</span>)
+conta.<span class="fn">depositar</span>(<span class="num">500</span>)
+conta.<span class="fn">sacar</span>(<span class="num">200</span>)
+conta.<span class="fn">ver_saldo</span>()
+
+<span class="cm"># conta.__saldo  →  AttributeError!</span>
+<span class="cm"># Mas dá pra acessar via name mangling (não faça isso):</span>
+<span class="cm"># conta._ContaBancaria__saldo</span></code></pre></div>
+  </div>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">🏷️</span> @property — getters e setters elegantes</div>
+    <div class="al tip"><span class="al-icon">💡</span> <span class="ic">@property</span> permite acessar um método como se fosse um atributo, e <span class="ic">@x.setter</span> controla a atribuição com validação.</div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="kw">class</span> <span class="cls">Pessoa</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, nome, idade):
+        <span class="slf">self</span>.nome  = nome
+        <span class="slf">self</span>.__idade = idade   <span class="cm"># privado</span>
+
+    <span class="deco">@property</span>
+    <span class="kw">def</span> <span class="fn">idade</span>(<span class="slf">self</span>):          <span class="cm"># getter — acesso como atributo</span>
+        <span class="kw">return</span> <span class="slf">self</span>.__idade
+
+    <span class="deco">@idade.setter</span>
+    <span class="kw">def</span> <span class="fn">idade</span>(<span class="slf">self</span>, valor):   <span class="cm"># setter — com validação</span>
+        <span class="kw">if</span> <span class="kw">not</span> <span class="fn">isinstance</span>(valor, <span class="tp">int</span>) <span class="kw">or</span> valor < <span class="num">0</span>:
+            <span class="kw">raise</span> <span class="cls">ValueError</span>(<span class="str">"Idade deve ser inteiro positivo!"</span>)
+        <span class="slf">self</span>.__idade = valor
+
+    <span class="deco">@property</span>
+    <span class="kw">def</span> <span class="fn">eh_maior</span>(<span class="slf">self</span>) -> <span class="tp">bool</span>:
+        <span class="kw">return</span> <span class="slf">self</span>.__idade >= <span class="num">18</span>
+
+
+p = <span class="cls">Pessoa</span>(<span class="str">"Carlos"</span>, <span class="num">20</span>)
+<span class="fn">print</span>(p.idade)       <span class="cm"># 20 — parece atributo, mas é método!</span>
+<span class="fn">print</span>(p.eh_maior)    <span class="cm"># True</span>
+p.idade = <span class="num">25</span>        <span class="cm"># usa o setter com validação</span>
+<span class="fn">print</span>(p.idade)       <span class="cm"># 25</span>
+
+<span class="kw">try</span>:
+    p.idade = <span class="num">-5</span>    <span class="cm"># vai lançar ValueError</span>
+<span class="kw">except</span> <span class="cls">ValueError</span> <span class="kw">as</span> e:
+    <span class="fn">print</span>(<span class="str">f"Erro: {e}"</span>)</code></pre></div>
+  </div>
+</section>
+
+<!-- INPUT & LISTAS -->
+<section id="input" class="section">
+  <h2 class="sh">Input, Listas & Loops com Classes</h2>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">⌨️</span> Criar objetos via input()</div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="kw">class</span> <span class="cls">Contato</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, nome, telefone, email=<span class="str">""</span>):
+        <span class="slf">self</span>.nome      = nome
+        <span class="slf">self</span>.telefone  = telefone
+        <span class="slf">self</span>.email     = email
+
+    <span class="kw">def</span> <span class="fn">exibir</span>(<span class="slf">self</span>):
+        <span class="fn">print</span>(<span class="str">f"  {self.nome} | {self.telefone} | {self.email or 'sem email'}"</span>)
+
+
+<span class="kw">def</span> <span class="fn">criar_contato_por_input</span>() -> <span class="cls">Contato</span>:
+    <span class="fn">print</span>(<span class="str">"\n--- Novo Contato ---"</span>)
+    nome     = <span class="fn">input</span>(<span class="str">"Nome: "</span>).<span class="fn">strip</span>()
+    telefone = <span class="fn">input</span>(<span class="str">"Telefone: "</span>).<span class="fn">strip</span>()
+    email    = <span class="fn">input</span>(<span class="str">"Email (opcional): "</span>).<span class="fn">strip</span>()
+    <span class="kw">return</span> <span class="cls">Contato</span>(nome, telefone, email)
+
+
+contato = <span class="fn">criar_contato_por_input</span>()
+contato.<span class="fn">exibir</span>()</code></pre></div>
+  </div>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">📋</span> Lista de objetos — o padrão mais usado</div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="kw">class</span> <span class="cls">Turma</span>:
+    <span class="cm">"""Gerencia uma lista de alunos."""</span>
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, nome):
+        <span class="slf">self</span>.nome   = nome
+        <span class="slf">self</span>.alunos = []    <span class="cm"># lista de objetos Aluno</span>
+
+    <span class="kw">def</span> <span class="fn">adicionar</span>(<span class="slf">self</span>, aluno):
+        <span class="slf">self</span>.alunos.<span class="fn">append</span>(aluno)
+        <span class="fn">print</span>(<span class="str">f"✅ {aluno.nome} adicionado(a) à turma {self.nome}"</span>)
+
+    <span class="kw">def</span> <span class="fn">listar</span>(<span class="slf">self</span>):
+        <span class="fn">print</span>(<span class="str">f"\n📚 Turma: {self.nome} ({len(self.alunos)} alunos)"</span>)
+        <span class="kw">for</span> i, aluno <span class="kw">in</span> <span class="fn">enumerate</span>(<span class="slf">self</span>.alunos, <span class="num">1</span>):
+            aluno.<span class="fn">exibir</span>(i)
+
+    <span class="kw">def</span> <span class="fn">buscar</span>(<span class="slf">self</span>, nome) -> <span class="tp">list</span>:
+        <span class="kw">return</span> [a <span class="kw">for</span> a <span class="kw">in</span> <span class="slf">self</span>.alunos <span class="kw">if</span> nome.<span class="fn">lower</span>() <span class="kw">in</span> a.nome.<span class="fn">lower</span>()]
+
+    <span class="kw">def</span> <span class="fn">media_geral</span>(<span class="slf">self</span>):
+        notas = [a.nota <span class="kw">for</span> a <span class="kw">in</span> <span class="slf">self</span>.alunos <span class="kw">if</span> a.nota <span class="kw">is not None</span>]
+        <span class="kw">return</span> <span class="fn">sum</span>(notas) / <span class="fn">len</span>(notas) <span class="kw">if</span> notas <span class="kw">else</span> <span class="num">0</span>
+
+    <span class="kw">def</span> <span class="fn">aprovados</span>(<span class="slf">self</span>):
+        <span class="kw">return</span> [a <span class="kw">for</span> a <span class="kw">in</span> <span class="slf">self</span>.alunos <span class="kw">if</span> (a.nota <span class="kw">or</span> <span class="num">0</span>) >= <span class="num">6</span>]
+
+
+<span class="kw">class</span> <span class="cls">Aluno</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, nome, nota=<span class="tp">None</span>):
+        <span class="slf">self</span>.nome = nome
+        <span class="slf">self</span>.nota = nota
+
+    <span class="kw">def</span> <span class="fn">exibir</span>(<span class="slf">self</span>, pos=<span class="str">""</span>):
+        nota_str = <span class="str">f"{self.nota:.1f}"</span> <span class="kw">if</span> <span class="slf">self</span>.nota <span class="kw">is not None</span> <span class="kw">else</span> <span class="str">"sem nota"</span>
+        status   = <span class="str">"✅"</span> <span class="kw">if</span> (<span class="slf">self</span>.nota <span class="kw">or</span> <span class="num">0</span>) >= <span class="num">6</span> <span class="kw">else</span> <span class="str">"❌"</span>
+        <span class="fn">print</span>(<span class="str">f"  {pos}. {self.nome} — {nota_str} {status}"</span>)
+
+
+<span class="cm"># Usando as classes</span>
+turma = <span class="cls">Turma</span>(<span class="str">"Python Avançado"</span>)
+turma.<span class="fn">adicionar</span>(<span class="cls">Aluno</span>(<span class="str">"Ana"</span>, <span class="num">9.5</span>))
+turma.<span class="fn">adicionar</span>(<span class="cls">Aluno</span>(<span class="str">"João"</span>, <span class="num">5.0</span>))
+turma.<span class="fn">adicionar</span>(<span class="cls">Aluno</span>(<span class="str">"Bia"</span>, <span class="num">8.0</span>))
+
+turma.<span class="fn">listar</span>()
+<span class="fn">print</span>(<span class="str">f"Média geral: {turma.media_geral():.1f}"</span>)
+<span class="fn">print</span>(<span class="str">f"Aprovados: {[a.nome for a in turma.aprovados()]}"</span>)</code></pre></div>
+  </div>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">🔄</span> Menu interativo com lista de objetos</div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="kw">def</span> <span class="fn">menu_turma</span>():
+    turma = <span class="cls">Turma</span>(<span class="fn">input</span>(<span class="str">"Nome da turma: "</span>))
+
+    <span class="kw">while True</span>:
+        <span class="fn">print</span>(<span class="str">"\n📚 GESTÃO DE TURMA"</span>)
+        <span class="fn">print</span>(<span class="str">"1. Adicionar aluno"</span>)
+        <span class="fn">print</span>(<span class="str">"2. Listar alunos"</span>)
+        <span class="fn">print</span>(<span class="str">"3. Buscar aluno"</span>)
+        <span class="fn">print</span>(<span class="str">"4. Ver aprovados"</span>)
+        <span class="fn">print</span>(<span class="str">"0. Sair"</span>)
+        op = <span class="fn">input</span>(<span class="str">"Opção: "</span>)
+
+        <span class="kw">if</span> op == <span class="str">"1"</span>:
+            nome = <span class="fn">input</span>(<span class="str">"Nome do aluno: "</span>)
+            <span class="kw">try</span>:
+                nota = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"Nota (Enter para pular): "</span>) <span class="kw">or</span> <span class="str">"0"</span>)
+            <span class="kw">except</span>:
+                nota = <span class="tp">None</span>
+            turma.<span class="fn">adicionar</span>(<span class="cls">Aluno</span>(nome, nota))
+
+        <span class="kw">elif</span> op == <span class="str">"2"</span>:
+            turma.<span class="fn">listar</span>()
+            <span class="fn">print</span>(<span class="str">f"  Média geral: {turma.media_geral():.1f}"</span>)
+
+        <span class="kw">elif</span> op == <span class="str">"3"</span>:
+            nome = <span class="fn">input</span>(<span class="str">"Buscar por nome: "</span>)
+            found = turma.<span class="fn">buscar</span>(nome)
+            <span class="kw">if</span> found:
+                <span class="kw">for</span> a <span class="kw">in</span> found: a.<span class="fn">exibir</span>()
+            <span class="kw">else</span>:
+                <span class="fn">print</span>(<span class="str">"Nenhum aluno encontrado."</span>)
+
+        <span class="kw">elif</span> op == <span class="str">"4"</span>:
+            ap = turma.<span class="fn">aprovados</span>()
+            <span class="fn">print</span>(<span class="str">f"Aprovados: {len(ap)}/{len(turma.alunos)}"</span>)
+            <span class="kw">for</span> a <span class="kw">in</span> ap: a.<span class="fn">exibir</span>()
+
+        <span class="kw">elif</span> op == <span class="str">"0"</span>:
+            <span class="fn">print</span>(<span class="str">"Até logo!"</span>)
+            <span class="kw">break</span>
+
+<span class="fn">menu_turma</span>()</code></pre></div>
+  </div>
+</section>
+
+<!-- MÉTODOS ESPECIAIS -->
+<section id="especiais" class="section">
+  <h2 class="sh">Métodos Especiais (Dunder Methods)</h2>
+  <div class="al info"><span class="al-icon">ℹ️</span> Métodos com duplo underscore (<span class="ic">__metodo__</span>) são chamados de <strong>dunder methods</strong> ou métodos mágicos. Python os chama automaticamente em situações específicas.</div>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">✨</span> __str__, __repr__, __len__, __eq__</div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="kw">class</span> <span class="cls">Livro</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, titulo, autor, paginas):
+        <span class="slf">self</span>.titulo  = titulo
+        <span class="slf">self</span>.autor   = autor
+        <span class="slf">self</span>.paginas = paginas
+
+    <span class="kw">def</span> <span class="fn">__str__</span>(<span class="slf">self</span>):           <span class="cm"># print(livro) e str(livro)</span>
+        <span class="kw">return</span> <span class="str">f'"{self.titulo}" por {self.autor}'</span>
+
+    <span class="kw">def</span> <span class="fn">__repr__</span>(<span class="slf">self</span>):          <span class="cm"># repr(livro) — dev-friendly</span>
+        <span class="kw">return</span> <span class="str">f'Livro("{self.titulo}", "{self.autor}", {self.paginas})'</span>
+
+    <span class="kw">def</span> <span class="fn">__len__</span>(<span class="slf">self</span>):           <span class="cm"># len(livro)</span>
+        <span class="kw">return</span> <span class="slf">self</span>.paginas
+
+    <span class="kw">def</span> <span class="fn">__eq__</span>(<span class="slf">self</span>, outro):     <span class="cm"># livro1 == livro2</span>
+        <span class="kw">return</span> <span class="slf">self</span>.titulo == outro.titulo <span class="kw">and</span> <span class="slf">self</span>.autor == outro.autor
+
+    <span class="kw">def</span> <span class="fn">__lt__</span>(<span class="slf">self</span>, outro):     <span class="cm"># livro1 < livro2 (para sorted)</span>
+        <span class="kw">return</span> <span class="slf">self</span>.paginas < outro.paginas
+
+    <span class="kw">def</span> <span class="fn">__add__</span>(<span class="slf">self</span>, outro):    <span class="cm"># livro1 + livro2 = total de páginas</span>
+        <span class="kw">return</span> <span class="slf">self</span>.paginas + outro.paginas
+
+    <span class="kw">def</span> <span class="fn">__contains__</span>(<span class="slf">self</span>, palavra): <span class="cm"># "python" in livro</span>
+        <span class="kw">return</span> palavra.<span class="fn">lower</span>() <span class="kw">in</span> <span class="slf">self</span>.titulo.<span class="fn">lower</span>()
+
+
+l1 = <span class="cls">Livro</span>(<span class="str">"Python Crash Course"</span>, <span class="str">"Eric Matthes"</span>, <span class="num">544</span>)
+l2 = <span class="cls">Livro</span>(<span class="str">"Fluent Python"</span>, <span class="str">"Luciano Ramalho"</span>, <span class="num">792</span>)
+
+<span class="fn">print</span>(l1)                   <span class="cm"># usa __str__</span>
+<span class="fn">print</span>(<span class="fn">repr</span>(l1))             <span class="cm"># usa __repr__</span>
+<span class="fn">print</span>(<span class="fn">len</span>(l1))              <span class="cm"># 544 — usa __len__</span>
+<span class="fn">print</span>(l1 == l2)             <span class="cm"># False — usa __eq__</span>
+<span class="fn">print</span>(l1 + l2)              <span class="cm"># 1336 — usa __add__</span>
+<span class="fn">print</span>(<span class="str">"Python"</span> <span class="kw">in</span> l1)      <span class="cm"># True — usa __contains__</span>
+
+livros = [l1, l2]
+<span class="fn">print</span>(<span class="fn">sorted</span>(livros))       <span class="cm"># ordena por páginas — usa __lt__</span></code></pre></div>
+  </div>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">🔁</span> __iter__ e __next__ — tornar iterável</div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="kw">class</span> <span class="cls">Contagem</span>:
+    <span class="cm">"""Conta de inicio até fim — pode usar em for!"""</span>
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, inicio, fim):
+        <span class="slf">self</span>.inicio = inicio
+        <span class="slf">self</span>.fim    = fim
+        <span class="slf">self</span>.atual  = inicio
+
+    <span class="kw">def</span> <span class="fn">__iter__</span>(<span class="slf">self</span>):     <span class="cm"># for x in contagem:</span>
+        <span class="slf">self</span>.atual = <span class="slf">self</span>.inicio
+        <span class="kw">return</span> <span class="slf">self</span>
+
+    <span class="kw">def</span> <span class="fn">__next__</span>(<span class="slf">self</span>):     <span class="cm"># próximo item do for</span>
+        <span class="kw">if</span> <span class="slf">self</span>.atual > <span class="slf">self</span>.fim:
+            <span class="kw">raise</span> <span class="cls">StopIteration</span>
+        valor = <span class="slf">self</span>.atual
+        <span class="slf">self</span>.atual += <span class="num">1</span>
+        <span class="kw">return</span> valor
+
+
+<span class="kw">for</span> n <span class="kw">in</span> <span class="cls">Contagem</span>(<span class="num">1</span>, <span class="num">5</span>):
+    <span class="fn">print</span>(n, end=<span class="str">" "</span>)   <span class="cm"># 1 2 3 4 5</span>
+
+<span class="cm"># Também funciona com list(), sum(), etc.</span>
+<span class="fn">print</span>(<span class="fn">list</span>(<span class="cls">Contagem</span>(<span class="num">1</span>, <span class="num">10</span>)))
+<span class="fn">print</span>(<span class="fn">sum</span>(<span class="cls">Contagem</span>(<span class="num">1</span>, <span class="num">100</span>)))  <span class="cm"># 5050</span></code></pre></div>
+  </div>
+</section>
+
+<!-- AVANÇADO -->
+<section id="avancado" class="section">
+  <h2 class="sh">Polimorfismo, @classmethod, @staticmethod & ABC</h2>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">🎭</span> Polimorfismo — duck typing</div>
+    <div class="concept-box">
+      <strong>Duck typing</strong>
+      "Se anda como pato e grasna como pato, é um pato." — em Python, não importa o tipo, importa se o objeto tem o método.
+    </div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="kw">class</span> <span class="cls">Cachorro</span>:
+    <span class="kw">def</span> <span class="fn">falar</span>(<span class="slf">self</span>): <span class="fn">print</span>(<span class="str">"Au au!"</span>)
+
+<span class="kw">class</span> <span class="cls">Gato</span>:
+    <span class="kw">def</span> <span class="fn">falar</span>(<span class="slf">self</span>): <span class="fn">print</span>(<span class="str">"Miau!"</span>)
+
+<span class="kw">class</span> <span class="cls">Papagaio</span>:
+    <span class="kw">def</span> <span class="fn">falar</span>(<span class="slf">self</span>): <span class="fn">print</span>(<span class="str">"Quero biscoito!"</span>)
+
+<span class="cm"># Polimorfismo — não importa o tipo, só precisa ter .falar()</span>
+animais = [<span class="cls">Cachorro</span>(), <span class="cls">Gato</span>(), <span class="cls">Papagaio</span>(), <span class="cls">Cachorro</span>()]
+<span class="kw">for</span> animal <span class="kw">in</span> animais:
+    animal.<span class="fn">falar</span>()   <span class="cm"># cada um fala do seu jeito!</span></code></pre></div>
+  </div>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">🏷️</span> @classmethod e @staticmethod</div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="kw">class</span> <span class="cls">Data</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, dia, mes, ano):
+        <span class="slf">self</span>.dia = dia
+        <span class="slf">self</span>.mes = mes
+        <span class="slf">self</span>.ano = ano
+
+    <span class="kw">def</span> <span class="fn">__str__</span>(<span class="slf">self</span>):
+        <span class="kw">return</span> <span class="str">f"{self.dia:02d}/{self.mes:02d}/{self.ano}"</span>
+
+    <span class="deco">@classmethod</span>
+    <span class="kw">def</span> <span class="fn">de_string</span>(<span class="tp">cls</span>, texto: <span class="tp">str</span>):
+        <span class="cm"># construtor alternativo — cria Data de "dd/mm/aaaa"</span>
+        d, m, a = <span class="fn">map</span>(<span class="tp">int</span>, texto.<span class="fn">split</span>(<span class="str">"/"</span>))
+        <span class="kw">return</span> <span class="tp">cls</span>(d, m, a)
+
+    <span class="deco">@classmethod</span>
+    <span class="kw">def</span> <span class="fn">hoje</span>(<span class="tp">cls</span>):
+        <span class="kw">from</span> datetime <span class="kw">import</span> date
+        d = date.<span class="fn">today</span>()
+        <span class="kw">return</span> <span class="tp">cls</span>(d.day, d.month, d.year)
+
+    <span class="deco">@staticmethod</span>
+    <span class="kw">def</span> <span class="fn">eh_bissexto</span>(ano: <span class="tp">int</span>) -> <span class="tp">bool</span>:
+        <span class="cm"># não usa self nem cls — função utilitária relacionada</span>
+        <span class="kw">return</span> ano % <span class="num">4</span> == <span class="num">0</span> <span class="kw">and</span> (ano % <span class="num">100</span> != <span class="num">0</span> <span class="kw">or</span> ano % <span class="num">400</span> == <span class="num">0</span>)
+
+
+d1 = <span class="cls">Data</span>(<span class="num">25</span>, <span class="num">12</span>, <span class="num">2025</span>)
+d2 = <span class="cls">Data</span>.<span class="fn">de_string</span>(<span class="str">"01/01/2026"</span>)  <span class="cm"># @classmethod</span>
+d3 = <span class="cls">Data</span>.<span class="fn">hoje</span>()                   <span class="cm"># @classmethod</span>
+<span class="fn">print</span>(d1, d2, d3)
+<span class="fn">print</span>(<span class="cls">Data</span>.<span class="fn">eh_bissexto</span>(<span class="num">2024</span>))      <span class="cm"># True — @staticmethod</span></code></pre></div>
+  </div>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">📐</span> ABC — Classes Abstratas</div>
+    <div class="al tip"><span class="al-icon">💡</span> Classes abstratas definem uma <strong>interface</strong>: obrigam as filhas a implementar certos métodos. Não dá pra instanciar a classe abstrata diretamente.</div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="kw">from</span> abc <span class="kw">import</span> ABC, abstractmethod
+
+<span class="kw">class</span> <span class="cls">Forma</span>(<span class="cls">ABC</span>):       <span class="cm"># classe abstrata</span>
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, cor=<span class="str">"branco"</span>):
+        <span class="slf">self</span>.cor = cor
+
+    <span class="deco">@abstractmethod</span>
+    <span class="kw">def</span> <span class="fn">area</span>(<span class="slf">self</span>) -> <span class="tp">float</span>:
+        <span class="kw">pass</span>   <span class="cm"># OBRIGATÓRIO implementar nas filhas</span>
+
+    <span class="deco">@abstractmethod</span>
+    <span class="kw">def</span> <span class="fn">perimetro</span>(<span class="slf">self</span>) -> <span class="tp">float</span>:
+        <span class="kw">pass</span>
+
+    <span class="kw">def</span> <span class="fn">info</span>(<span class="slf">self</span>):       <span class="cm"># método concreto — já implementado</span>
+        <span class="fn">print</span>(<span class="str">f"Área: {self.area():.2f} | Perímetro: {self.perimetro():.2f}"</span>)
+
+
+<span class="kw">class</span> <span class="cls">Circulo</span>(<span class="cls">Forma</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, raio, cor=<span class="str">"branco"</span>):
+        <span class="fn">super</span>().<span class="fn">__init__</span>(cor)
+        <span class="slf">self</span>.raio = raio
+
+    <span class="kw">def</span> <span class="fn">area</span>(<span class="slf">self</span>):
+        <span class="kw">import</span> math
+        <span class="kw">return</span> math.pi * <span class="slf">self</span>.raio ** <span class="num">2</span>
+
+    <span class="kw">def</span> <span class="fn">perimetro</span>(<span class="slf">self</span>):
+        <span class="kw">import</span> math
+        <span class="kw">return</span> <span class="num">2</span> * math.pi * <span class="slf">self</span>.raio
+
+
+<span class="kw">class</span> <span class="cls">Retangulo</span>(<span class="cls">Forma</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, l, a): <span class="slf">self</span>.l, <span class="slf">self</span>.a = l, a
+    <span class="kw">def</span> <span class="fn">area</span>(<span class="slf">self</span>):       <span class="kw">return</span> <span class="slf">self</span>.l * <span class="slf">self</span>.a
+    <span class="kw">def</span> <span class="fn">perimetro</span>(<span class="slf">self</span>): <span class="kw">return</span> <span class="num">2</span> * (<span class="slf">self</span>.l + <span class="slf">self</span>.a)
+
+
+formas = [<span class="cls">Circulo</span>(<span class="num">5</span>), <span class="cls">Retangulo</span>(<span class="num">4</span>, <span class="num">6</span>), <span class="cls">Circulo</span>(<span class="num">3</span>)]
+<span class="kw">for</span> f <span class="kw">in</span> formas:
+    f.<span class="fn">info</span>()   <span class="cm"># polimorfismo + ABC</span>
+
+<span class="cm"># Forma() → TypeError: Can't instantiate abstract class</span></code></pre></div>
+  </div>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">📦</span> Dataclasses — classes de dados sem boilerplate</div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="kw">from</span> dataclasses <span class="kw">import</span> dataclass, field
+
+<span class="deco">@dataclass</span>
+<span class="kw">class</span> <span class="cls">Produto</span>:
+    nome:    <span class="tp">str</span>
+    preco:   <span class="tp">float</span>
+    estoque: <span class="tp">int</span>  = <span class="num">0</span>
+    tags:    <span class="tp">list</span> = <span class="fn">field</span>(default_factory=<span class="tp">list</span>)
+
+    <span class="kw">def</span> <span class="fn">com_desconto</span>(<span class="slf">self</span>, pct: <span class="tp">float</span>) -> <span class="tp">float</span>:
+        <span class="kw">return</span> <span class="slf">self</span>.preco * ((<span class="num">100</span> - pct) / <span class="num">100</span>)
+
+
+<span class="cm"># @dataclass gera __init__, __repr__, __eq__ automaticamente!</span>
+p1 = <span class="cls">Produto</span>(<span class="str">"Café"</span>, <span class="num">18.90</span>, <span class="num">10</span>, [<span class="str">"bebida"</span>, <span class="str">"quente"</span>])
+p2 = <span class="cls">Produto</span>(<span class="str">"Leite"</span>, <span class="num">6.50</span>)
+
+<span class="fn">print</span>(p1)                      <span class="cm"># já tem __repr__ automático</span>
+<span class="fn">print</span>(p1.com_desconto(<span class="num">10</span>))    <span class="cm"># 17.01</span>
+<span class="fn">print</span>(p1 == p2)               <span class="cm"># False — __eq__ automático</span></code></pre></div>
+  </div>
+</section>
+
+<!-- PROJETO -->
+<section id="projeto" class="section">
+  <h2 class="sh">Projeto completo — Sistema de Biblioteca</h2>
+  <div class="al ok"><span class="al-icon">🎯</span> Um sistema completo com herança, encapsulamento, listas de objetos, input e métodos especiais.</div>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">🏗️</span> Código completo</div>
+    <div class="cw"><div class="ch"><span class="cl">python</span><button class="cpb" onclick="cp(this)">copiar</button></div>
+<pre><code><span class="kw">from</span> datetime <span class="kw">import</span> date
+
+<span class="cm"># ── CLASSES BASE ──────────────────────────────────────────</span>
+<span class="kw">class</span> <span class="cls">Pessoa</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, nome: <span class="tp">str</span>, email: <span class="tp">str</span>):
+        <span class="slf">self</span>.nome  = nome
+        <span class="slf">self</span>.email = email
+
+    <span class="kw">def</span> <span class="fn">__repr__</span>(<span class="slf">self</span>):
+        <span class="kw">return</span> <span class="str">f"{self.__class__.__name__}({self.nome!r})"</span>
+
+
+<span class="kw">class</span> <span class="cls">Membro</span>(<span class="cls">Pessoa</span>):
+    _prox_id = <span class="num">1</span>
+
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, nome, email):
+        <span class="fn">super</span>().<span class="fn">__init__</span>(nome, email)
+        <span class="slf">self</span>.id       = <span class="cls">Membro</span>._prox_id
+        <span class="cls">Membro</span>._prox_id += <span class="num">1</span>
+        <span class="slf">self</span>.emprestimos = []
+
+    <span class="kw">def</span> <span class="fn">pegar_livro</span>(<span class="slf">self</span>, livro):
+        <span class="slf">self</span>.emprestimos.<span class="fn">append</span>(livro)
+        livro.disponivel = <span class="tp">False</span>
+        <span class="fn">print</span>(<span class="str">f"📖 {self.nome} pegou '{livro.titulo}'"</span>)
+
+    <span class="kw">def</span> <span class="fn">devolver</span>(<span class="slf">self</span>, livro):
+        <span class="kw">if</span> livro <span class="kw">in</span> <span class="slf">self</span>.emprestimos:
+            <span class="slf">self</span>.emprestimos.<span class="fn">remove</span>(livro)
+            livro.disponivel = <span class="tp">True</span>
+            <span class="fn">print</span>(<span class="str">f"✅ {self.nome} devolveu '{livro.titulo}'"</span>)
+        <span class="kw">else</span>:
+            <span class="fn">print</span>(<span class="str">"Livro não está com este membro!"</span>)
+
+    <span class="kw">def</span> <span class="fn">listar_emprestimos</span>(<span class="slf">self</span>):
+        <span class="kw">if not</span> <span class="slf">self</span>.emprestimos:
+            <span class="fn">print</span>(<span class="str">f"{self.nome} não tem livros."</span>)
+        <span class="kw">else</span>:
+            <span class="fn">print</span>(<span class="str">f"Livros com {self.nome}:"</span>)
+            <span class="kw">for</span> l <span class="kw">in</span> <span class="slf">self</span>.emprestimos:
+                <span class="fn">print</span>(<span class="str">f"  • {l.titulo}"</span>)
+
+
+<span class="kw">class</span> <span class="cls">Livro</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, titulo: <span class="tp">str</span>, autor: <span class="tp">str</span>, ano: <span class="tp">int</span>):
+        <span class="slf">self</span>.titulo     = titulo
+        <span class="slf">self</span>.autor      = autor
+        <span class="slf">self</span>.ano        = ano
+        <span class="slf">self</span>.disponivel = <span class="tp">True</span>
+
+    <span class="kw">def</span> <span class="fn">__str__</span>(<span class="slf">self</span>):
+        status = <span class="str">"✅ disponível"</span> <span class="kw">if</span> <span class="slf">self</span>.disponivel <span class="kw">else</span> <span class="str">"❌ emprestado"</span>
+        <span class="kw">return</span> <span class="str">f'"{self.titulo}" — {self.autor} ({self.ano}) [{status}]'</span>
+
+
+<span class="cm"># ── BIBLIOTECA (gerencia tudo) ────────────────────────────</span>
+<span class="kw">class</span> <span class="cls">Biblioteca</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, nome: <span class="tp">str</span>):
+        <span class="slf">self</span>.nome    = nome
+        <span class="slf">self</span>.livros  = []
+        <span class="slf">self</span>.membros = []
+
+    <span class="kw">def</span> <span class="fn">__len__</span>(<span class="slf">self</span>):
+        <span class="kw">return</span> <span class="fn">len</span>(<span class="slf">self</span>.livros)
+
+    <span class="kw">def</span> <span class="fn">cadastrar_livro</span>(<span class="slf">self</span>):
+        titulo = <span class="fn">input</span>(<span class="str">"Título: "</span>)
+        autor  = <span class="fn">input</span>(<span class="str">"Autor: "</span>)
+        <span class="kw">try</span>:
+            ano = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Ano: "</span>))
+        <span class="kw">except</span> <span class="cls">ValueError</span>:
+            ano = date.<span class="fn">today</span>().year
+        livro = <span class="cls">Livro</span>(titulo, autor, ano)
+        <span class="slf">self</span>.livros.<span class="fn">append</span>(livro)
+        <span class="fn">print</span>(<span class="str">f"📚 Livro '{titulo}' cadastrado!"</span>)
+
+    <span class="kw">def</span> <span class="fn">cadastrar_membro</span>(<span class="slf">self</span>):
+        nome  = <span class="fn">input</span>(<span class="str">"Nome do membro: "</span>)
+        email = <span class="fn">input</span>(<span class="str">"Email: "</span>)
+        m = <span class="cls">Membro</span>(nome, email)
+        <span class="slf">self</span>.membros.<span class="fn">append</span>(m)
+        <span class="fn">print</span>(<span class="str">f"👤 Membro #{m.id} '{nome}' cadastrado!"</span>)
+
+    <span class="kw">def</span> <span class="fn">listar_livros</span>(<span class="slf">self</span>):
+        <span class="fn">print</span>(<span class="str">f"\n📚 Acervo — {len(self)} livros:"</span>)
+        <span class="kw">for</span> i, l <span class="kw">in</span> <span class="fn">enumerate</span>(<span class="slf">self</span>.livros, <span class="num">1</span>):
+            <span class="fn">print</span>(<span class="str">f"  {i}. {l}"</span>)
+
+    <span class="kw">def</span> <span class="fn">listar_membros</span>(<span class="slf">self</span>):
+        <span class="fn">print</span>(<span class="str">f"\n👥 Membros — {len(self.membros)}:"</span>)
+        <span class="kw">for</span> m <span class="kw">in</span> <span class="slf">self</span>.membros:
+            <span class="fn">print</span>(<span class="str">f"  #{m.id} {m.nome} ({len(m.emprestimos)} livro(s))"</span>)
+
+    <span class="kw">def</span> <span class="fn">emprestar</span>(<span class="slf">self</span>):
+        disp = [l <span class="kw">for</span> l <span class="kw">in</span> <span class="slf">self</span>.livros <span class="kw">if</span> l.disponivel]
+        <span class="kw">if not</span> disp: <span class="fn">print</span>(<span class="str">"Nenhum livro disponível."</span>); <span class="kw">return</span>
+        <span class="fn">print</span>(<span class="str">"Livros disponíveis:"</span>)
+        <span class="kw">for</span> i, l <span class="kw">in</span> <span class="fn">enumerate</span>(disp, <span class="num">1</span>): <span class="fn">print</span>(<span class="str">f"  {i}. {l.titulo}"</span>)
+        <span class="kw">try</span>:
+            li = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Número do livro: "</span>)) - <span class="num">1</span>
+            livro = disp[li]
+            self.<span class="fn">listar_membros</span>()
+            mi = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"ID do membro: "</span>))
+            membro = <span class="fn">next</span>((m <span class="kw">for</span> m <span class="kw">in</span> <span class="slf">self</span>.membros <span class="kw">if</span> m.id == mi), <span class="tp">None</span>)
+            <span class="kw">if</span> membro: membro.<span class="fn">pegar_livro</span>(livro)
+            <span class="kw">else</span>: <span class="fn">print</span>(<span class="str">"Membro não encontrado!"</span>)
+        <span class="kw">except</span> (<span class="cls">ValueError</span>, <span class="cls">IndexError</span>):
+            <span class="fn">print</span>(<span class="str">"Seleção inválida!"</span>)
+
+    <span class="kw">def</span> <span class="fn">menu</span>(<span class="slf">self</span>):
+        <span class="kw">while True</span>:
+            <span class="fn">print</span>(<span class="str">f"\n🏛️  {self.nome}"</span>)
+            <span class="fn">print</span>(<span class="str">"1. Cadastrar livro"</span>)
+            <span class="fn">print</span>(<span class="str">"2. Cadastrar membro"</span>)
+            <span class="fn">print</span>(<span class="str">"3. Listar livros"</span>)
+            <span class="fn">print</span>(<span class="str">"4. Listar membros"</span>)
+            <span class="fn">print</span>(<span class="str">"5. Emprestar livro"</span>)
+            <span class="fn">print</span>(<span class="str">"0. Sair"</span>)
+            op = <span class="fn">input</span>(<span class="str">"Opção: "</span>)
+
+            acoes = {
+                <span class="str">"1"</span>: <span class="slf">self</span>.cadastrar_livro,
+                <span class="str">"2"</span>: <span class="slf">self</span>.cadastrar_membro,
+                <span class="str">"3"</span>: <span class="slf">self</span>.listar_livros,
+                <span class="str">"4"</span>: <span class="slf">self</span>.listar_membros,
+                <span class="str">"5"</span>: <span class="slf">self</span>.emprestar,
+            }
+            <span class="kw">if</span> op <span class="kw">in</span> acoes:
+                acoes[op]()
+            <span class="kw">elif</span> op == <span class="str">"0"</span>:
+                <span class="fn">print</span>(<span class="str">"Até logo!"</span>); <span class="kw">break</span>
+
+
+<span class="cm"># ── RODAR O SISTEMA ───────────────────────────────────────</span>
+<span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    nome = <span class="fn">input</span>(<span class="str">"Nome da biblioteca: "</span>)
+    bib  = <span class="cls">Biblioteca</span>(nome)
+    bib.<span class="fn">menu</span>()</code></pre></div>
+  </div>
+
+  <div class="cb">
+    <div class="btitle"><span class="ic">📋</span> Resumo de todos os conceitos</div>
+    <div class="tw"><table>
+      <thead><tr><th>Conceito</th><th>Sintaxe</th><th>Para que serve</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag pu">class</span></td><td><span class="ic">class Nome:</span></td><td>Define o molde de um objeto</td></tr>
+        <tr><td><span class="tag pu">__init__</span></td><td><span class="ic">def __init__(self, ...)</span></td><td>Construtor — inicializa o objeto</td></tr>
+        <tr><td><span class="tag pu">self</span></td><td><span class="ic">self.atributo</span></td><td>Referência ao próprio objeto</td></tr>
+        <tr><td><span class="tag gr">Herança</span></td><td><span class="ic">class Filho(Pai):</span></td><td>Reaproveita código do pai</td></tr>
+        <tr><td><span class="tag gr">super()</span></td><td><span class="ic">super().__init__(...)</span></td><td>Chama método do pai</td></tr>
+        <tr><td><span class="tag bl">@property</span></td><td><span class="ic">@property</span></td><td>Getter elegante com validação</td></tr>
+        <tr><td><span class="tag bl">@classmethod</span></td><td><span class="ic">@classmethod / cls</span></td><td>Método que age na classe</td></tr>
+        <tr><td><span class="tag bl">@staticmethod</span></td><td><span class="ic">@staticmethod</span></td><td>Função utilitária na classe</td></tr>
+        <tr><td><span class="tag or">__str__</span></td><td><span class="ic">def __str__(self)</span></td><td>Como o objeto aparece no print()</td></tr>
+        <tr><td><span class="tag or">__eq__</span></td><td><span class="ic">def __eq__(self, outro)</span></td><td>Comparação com ==</td></tr>
+        <tr><td><span class="tag pk">ABC</span></td><td><span class="ic">class X(ABC): @abstractmethod</span></td><td>Interface — obriga implementação</td></tr>
+        <tr><td><span class="tag pk">@dataclass</span></td><td><span class="ic">@dataclass</span></td><td>Classe de dados sem boilerplate</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+function go(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.sitem').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  document.querySelectorAll('.sitem').forEach(b => {
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'"+id+"'")) b.classList.add('active');
+  });
+  if (!btn) {
+    document.querySelectorAll('nav button').forEach(b => {
+      if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'"+id+"'")) b.classList.add('active');
+    });
+  }
+}
+function cp(btn) {
+  const pre = btn.closest('.cw').querySelector('pre');
+  navigator.clipboard.writeText(pre.innerText).then(() => {
+    btn.textContent = 'copiado!'; btn.classList.add('ok');
+    setTimeout(() => { btn.textContent = 'copiar'; btn.classList.remove('ok'); }, 2000);
+  });
+}
+</script>
